@@ -14,6 +14,16 @@ set undodir=~/.vim/undodir
 set undofile
 set clipboard+=unnamedplus
 
+let &t_SI = "\<esc>[5 q"
+let &t_SR = "\<esc>[5 q"
+let &t_EI = "\<esc>[2 q"
+
+autocmd VimEnter * stopinsert
+autocmd VimLeave * startinsert
+
+" Disable automatic commenting on new line
+autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
+
 call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
@@ -30,3 +40,4 @@ filetype plugin on
 " Keyboard Mapping
 
 nnoremap S :%s//g<Left><Left>
+
