@@ -18,6 +18,8 @@ let &t_SI = "\<esc>[5 q"
 let &t_SR = "\<esc>[5 q"
 let &t_EI = "\<esc>[1 q"
 
+let mapleader=","
+
 autocmd VimEnter * stopinsert
 autocmd VimLeave * startinsert
 
@@ -207,4 +209,4 @@ let g:coc_global_extensions = [
 " Keyboard Mapping
 nnoremap S :%s//g<Left><Left>
 " Open NerdTree
-nmap t :NERDTreeToggle<Enter> 
+nmap <leader>n :NERDTree<cr>
