@@ -40,13 +40,14 @@ call plug#end()
 
 colorscheme gruvbox
 set background=dark
+
 " hi Normal guibg=NONE ctermbg=NONE
 
 filetype plugin on
 
 " NerdTree
 
-let NERDTreeQuitOnOpen=1
+let NERDTreeQuitOnOpen=1 " Closes nerdtree when a file is opened
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif " Opens nerdtree if no file is specified
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Autoclose nerdtree when other windows are closed
@@ -221,7 +222,7 @@ let g:coc_global_extensions = [
 nnoremap <leader>s :%s//g<Left><Left>
 
 " Open NerdTree
-nmap <Leader>n :NERDTree<CR>
+nnoremap <Leader>n :NERDTree<CR>
 
 " FZF
 nnoremap <Leader>p :Files<CR>
