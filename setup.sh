@@ -7,3 +7,4 @@ cp -r .vim .vimrc $HOME
 # Installing plugins 
 echo "Installing plugins with Plug"
 vim +PlugInstall&
+vim +CocInstall&
