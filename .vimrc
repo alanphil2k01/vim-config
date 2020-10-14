@@ -1,6 +1,7 @@
 syntax on
 
 set nu
+set relativenumber
 set incsearch
 set noerrorbells
 set tabstop=4 softtabstop=4
@@ -18,7 +19,7 @@ let &t_SI = "\<esc>[5 q"
 let &t_SR = "\<esc>[5 q"
 let &t_EI = "\<esc>[1 q"
 
-let mapleader=","
+let mapleader=" "
 
 autocmd VimEnter * stopinsert
 autocmd VimLeave * startinsert
@@ -33,6 +34,8 @@ Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 Plug 'morhetz/gruvbox'
 Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
+Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+Plug 'junegunn/fzf.vim'
 call plug#end()
 
 colorscheme gruvbox
@@ -43,9 +46,15 @@ filetype plugin on
 
 " NerdTree
 
+let NERDTreeQuitOnOpen=1
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif " Opens nerdtree if no file is specified
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Autoclose nerdtree when other tabs are closed
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Autoclose nerdtree when other windows are closed
+
+" FZF
+
+let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
+let $FZF_DEFAULT_OPTS='--reverse'
 
 " CoC
 " TextEdit might fail if hidden is not set.
@@ -196,7 +205,7 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+"nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
 "CoC extensions
 
@@ -207,6 +216,15 @@ let g:coc_global_extensions = [
     \ ]
 
 " Keyboard Mapping
-nnoremap S :%s//g<Left><Left>
+
+" S for replacing all occurance of a word/patter
+nnoremap <leader>s :%s//g<Left><Left>
+
 " Open NerdTree
-nmap <leader>n :NERDTree<cr>
+nmap <Leader>n :NERDTree<CR>
+
+" FZF
+nnoremap <Leader>p :Files<CR>
+
+" :so will source ~/.vimrc
+nnoremap <Leader><CR> :so ~/.vimrc<CR>
