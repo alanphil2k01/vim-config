@@ -246,7 +246,7 @@ nnoremap <leader>s :%s//g<Left><Left>
 nnoremap <Leader>n :NERDTree<CR>
 
 " FZF
-nnoremap <Leader>p :Files<CR>
+nnoremap <Leader>p :GFiles<CR>
 
 " :so will source ~/.vimrc
 nnoremap <Leader><CR> :so ~/.vimrc<CR>

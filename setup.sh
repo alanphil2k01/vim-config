@@ -27,6 +27,8 @@ vim +PlugInstall
 # Installing 
 clear
 echo "Opening .vimrc to install coc-extensions"
+echo "Once done close out of it with :q"
+sleep 5
 vim ~/.vimrc
 
 # Deleting the repository
