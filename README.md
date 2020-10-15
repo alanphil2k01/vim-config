@@ -3,7 +3,7 @@
 ## Vim Setup
 
 ### Manual Method
-```
+``` sh
 git clone https://github.com/alanphil2k01/vim-config.git
 cd vim-config
 cp .vimrc ~/.vimrc
@@ -14,15 +14,15 @@ vim ~/.vimrc // This will install coc-extensions
 ```
 
 ### Automatic method
-```
+``` sh
 curl -O https://raw.githubusercontent.com/alanphil2k01/vim-config/master/setup.sh 
 sh setup.sh
 ```
 
-## Nvim Setup
+## Neovim Setup
 
 ### Manual Method
-```
+``` sh
 git clone https://github.com/alanphil2k01/vim-config.git
 cd vim-config
 mkdir ~/.config/nvim // Create if not present
@@ -34,7 +34,7 @@ nvim ~/.config/nvim/init.vim // This will install coc-extensions
 ```
 
 ### Automatic method
-```
+``` sh
 curl -O https://raw.githubusercontent.com/alanphil2k01/vim-config/master/setup-nvim.sh 
 sh setup-nvim.sh
 ```
