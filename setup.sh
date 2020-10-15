@@ -28,3 +28,13 @@ vim +PlugInstall
 clear
 echo "Opening .vimrc to install coc-extensions"
 vim ~/.vimrc
+
+# Deleting the repository
+clear
+echo "Deleting vim-config repository"
+cd ../
+rm -rf vim-config
+
+# Done
+clear
+echo "All Done..."
