@@ -38,6 +38,8 @@ Plug 'preservim/nerdtree'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
+Plug 'stsewd/fzf-checkout.vim'
+Plug 'tpope/vim-fugitive'
 call plug#end()
 
 " gruvbox
@@ -257,3 +259,10 @@ nmap <leader>l :wincmd l<CR>
 
 " go
 au FileType go nmap <leader>rv <Plug>(go-run-vertical)
+
+" git
+nmap <leader>gj :diffget //3<CR>
+nmap <leader>gf :diffget //2<CR>
+nmap <leader>gs :G<CR>
+nnoremap <leader>gc :GBranches<CR>
+nnoremap <leader>ga :Git fetch --all<CR>
