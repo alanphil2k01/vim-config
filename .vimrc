@@ -14,6 +14,7 @@ set nobackup
 set undodir=~/.vim/undodir
 set undofile
 set clipboard+=unnamedplus
+set autochdir
 
 " Set map leader
 let mapleader=" "
@@ -246,7 +247,7 @@ nnoremap <leader>s :%s//g<Left><Left>
 nnoremap <Leader>n :NERDTree<CR>
 
 " FZF
-nnoremap <Leader>p :GFiles<CR>
+nnoremap <Leader>p :Files<CR>
 
 " :so will source ~/.vimrc
 nnoremap <Leader><CR> :so ~/.vimrc<CR>
