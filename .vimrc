@@ -15,18 +15,20 @@ set undodir=~/.vim/undodir
 set undofile
 set clipboard+=unnamedplus
 
+" Set map leader
+let mapleader=" "
+
+" Change cursor for vim in insert mode
 let &t_SI = "\<esc>[5 q"
 let &t_SR = "\<esc>[5 q"
 let &t_EI = "\<esc>[1 q"
-
-let mapleader=" "
-
 autocmd VimEnter * stopinsert
 autocmd VimLeave * startinsert
 
 " Disable automatic commenting on new line
 autocmd FileType * setlocal formatoptions-=c formatoptions-=r formatoptions-=o
 
+" Plugins
 call plug#begin('~/.vim/plugged')
 Plug 'sheerun/vim-polyglot'
 Plug 'nsf/gocode', { 'rtp': 'vim', 'do': '~/.vim/plugged/gocode/vim/symlink.sh' }
@@ -38,24 +40,42 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 call plug#end()
 
+" gruvbox
 colorscheme gruvbox
 set background=dark
 
+" Disable to 
 " hi Normal guibg=NONE ctermbg=NONE
 
 filetype plugin on
 
 " NerdTree
-
 let NERDTreeQuitOnOpen=1 " Closes nerdtree when a file is opened
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif " Opens nerdtree if no file is specified
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif " Autoclose nerdtree when other windows are closed
 
 " FZF
-
 let g:fzf_layout = { 'window': { 'width': 0.8, 'height': 0.8 } }
 let $FZF_DEFAULT_OPTS='--reverse'
+
+" go
+let g:go_fmt_command = "goimports"
+let g:go_highlight_array_whitespace_error = 0
+let g:go_highlight_chan_whitespace_error = 0
+let g:go_highlight_extra_types = 0
+let g:go_highlight_space_tab_error = 0
+let g:go_highlight_trailing_whitespace_error = 0
+let g:go_highlight_operators = 1
+let g:go_highlight_functions = 1
+let g:go_highlight_function_parameters = 1
+let g:go_highlight_function_calls = 1
+let g:go_highlight_types = 1
+let g:go_highlight_fields = 1
+let g:go_highlight_build_constraints = 1
+let g:go_highlight_generate_tags = 1
+let g:go_highlight_variable_declarations = 1
+let g:go_highlight_variable_assignments = 1
 
 " CoC
 " TextEdit might fail if hidden is not set.
@@ -192,24 +212,23 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 
 " Mappings for CoCList
 " Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+" nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 " Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+" nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
 " Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
+" nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 " Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+" nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
 " Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+" nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 " Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
+" nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 " Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
+" nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
-"nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+" nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
 
-"CoC extensions
-
+" CoC extensions
 let g:coc_global_extensions = [
     \ 'coc-pairs',
     \ 'coc-go',
@@ -229,3 +248,12 @@ nnoremap <Leader>p :Files<CR>
 
 " :so will source ~/.vimrc
 nnoremap <Leader><CR> :so ~/.vimrc<CR>
+
+" Change between windows
+nmap <leader>h :wincmd h<CR>
+nmap <leader>j :wincmd j<CR>
+nmap <leader>k :wincmd k<CR>
+nmap <leader>l :wincmd l<CR>
+
+" go
+au FileType go nmap <leader>rv <Plug>(go-run-vertical)
