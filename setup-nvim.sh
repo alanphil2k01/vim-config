@@ -28,14 +28,14 @@ sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.
 # Installing plugins 
 clear
 echo "Installing plugins with Plug"
-echo "Quit out of after its done by :q"
+echo "Quit out of after its done by :qall"
 sleep 5
 nvim +PlugInstall
 
 # Installing 
 clear
 echo "Opening .vimrc to install coc-extensions"
-echo "Once done close out of it with :q"
+echo "Once done close out of it with :qall"
 sleep 5
 nvim ~/.config/nvim/init.vim
 

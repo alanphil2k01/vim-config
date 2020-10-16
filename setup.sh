@@ -20,14 +20,14 @@ curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
 # Installing plugins 
 clear
 echo "Installing plugins with Plug"
-echo "Quit out of after its done by :q"
+echo "Quit out of after its done by :qall"
 sleep 5
 vim +PlugInstall
 
 # Installing 
 clear
 echo "Opening .vimrc to install coc-extensions"
-echo "Once done close out of it with :q"
+echo "Once done close out of it with :qall"
 sleep 5
 vim ~/.vimrc
 
