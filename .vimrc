@@ -270,4 +270,4 @@ nnoremap <leader>ga :Git fetch --all<CR>
 
 " terminal
 nmap <Leader>t :terminal<CR>
-tnoremap <Leader><Esc> <C-\><C-n>
+tnoremap <Esc><Esc> <C-\><C-n>
