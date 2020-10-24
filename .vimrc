@@ -267,3 +267,7 @@ nmap <leader>gf :diffget //2<CR>
 nmap <leader>gs :G<CR>
 nnoremap <leader>gc :GBranches<CR>
 nnoremap <leader>ga :Git fetch --all<CR>
+
+" terminal
+nmap <Leader>t :terminal<CR>
+tnoremap <Leader><Esc> <C-\><C-n>
