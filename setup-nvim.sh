@@ -17,7 +17,7 @@ fi
 # Copying config files
 clear
 echo "Copying vim files"
-cp -r .vimrc ~/.config/nvim/init.vim
+cp -r init.vim ~/.config/nvim/init.vim
 
 # Installing vim plug
 clear

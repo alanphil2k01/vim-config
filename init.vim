@@ -235,7 +235,8 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 let g:coc_global_extensions = [
     \ 'coc-pairs',
     \ 'coc-go',
-    \ 'coc-python'
+    \ 'coc-python',
+    \ 'coc-rome'
     \ ]
 
 " Keyboard Mapping
@@ -269,7 +270,7 @@ nnoremap <leader>gc :GBranches<CR>
 nnoremap <leader>ga :Git fetch --all<CR>
 
 " terminal
-nmap <Leader>t :terminal<CR>
+nmap <Leader>t <C-w>n:terminal<CR>
 tnoremap <Esc><Esc> <C-\><C-n>
 tnoremap <Esc>q <C-\><C-n>:q<CR>
 
