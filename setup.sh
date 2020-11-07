@@ -1,5 +1,17 @@
 #!/bin/sh
 
+# Check for dependencies
+clear
+echo "Checking for dependencies"
+if ! [ -x "$(command -v node)" ]; then
+    echo 'Error: node is not installed.' >&2
+    exit 1
+fi
+if ! [ -x "$(command -v npm)" ]; then
+    echo 'Error: node is not installed.' >&2
+    exit 1
+fi
+
 # git clone repo
 clear
 echo "Cloning Repo"

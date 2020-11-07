@@ -1,5 +1,9 @@
 # My vim config
 
+## Dependancies
+
+[nodejs](https://nodejs.org/en/) [npm](https://www.npmjs.com/)
+
 ## Vim Setup
 
 ### Manual Method

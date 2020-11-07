@@ -1,5 +1,19 @@
 #!/bin/sh
 
+# Check for dependencies
+
+clear
+echo "Checking for dependencies"
+if ! [ -x "$(command -v node)" ]; then
+    echo 'Error: node is not installed.' >&2
+    exit 1
+fi
+
+if ! [ -x "$(command -v npm)" ]; then
+    echo 'Error: node is not installed.' >&2
+    exit 1
+fi
+
 # git clone repo
 clear
 echo "Cloning Repo"
@@ -34,7 +48,7 @@ nvim +PlugInstall
 
 # Installing 
 clear
-echo "Opening .vimrc to install coc-extensions"
+echo "Opening init.vim to install coc-extensions"
 echo "Once done close out of it with :qall"
 sleep 5
 nvim ~/.config/nvim/init.vim
