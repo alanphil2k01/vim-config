@@ -283,3 +283,9 @@ nmap <leader>d "_dP
 
 " undotree
 nnoremap <leader>u :UndotreeShow<CR>
+
+" A blank line above current line
+nmap <leader>o o<Esc>k
+
+" A blank line above current line
+nmap <leader>O O<Esc>j
