@@ -11,10 +11,11 @@ set nowrap
 set smartcase
 set noswapfile
 set nobackup
-set undodir=~/.vim/undodir
+set undodir=~/.config/nvim/undodir
 set undofile
 set clipboard+=unnamedplus
 set autochdir
+set signcolumn=yes
 
 " Set map leader
 let mapleader=" "
@@ -41,13 +42,16 @@ Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
 Plug 'junegunn/fzf.vim'
 Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-fugitive'
+Plug 'mbbill/undotree'
 call plug#end()
 
 " gruvbox
 colorscheme gruvbox
 set background=dark
 
-" Disable to 
+set colorcolumn=100
+
+" Transparency
 " hi Normal guibg=NONE ctermbg=NONE
 
 filetype plugin on
@@ -266,7 +270,8 @@ au FileType go nmap <leader>rv <Plug>(go-run-vertical)
 nmap <leader>gj :diffget //3<CR>
 nmap <leader>gf :diffget //2<CR>
 nmap <leader>gs :G<CR>
-nnoremap <leader>gc :GBranches<CR>
+nnoremap <leader>gc :Gcommit<CR>
+nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>ga :Git fetch --all<CR>
 
 " terminal
@@ -275,4 +280,7 @@ tnoremap <Esc><Esc> <C-\><C-n>
 tnoremap <Esc>q <C-\><C-n>:q<CR>
 
 " Delete without overwriting yank
-nmap <leader>d "_d
+nmap <leader>d "_dP
+
+" undotree
+nnoremap <leader>u :UndotreeShow<CR>
