@@ -239,7 +239,9 @@ set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
 let g:coc_global_extensions = [
     \ 'coc-pairs',
     \ 'coc-go',
-    \ 'coc-python'
+    \ 'coc-python',
+    \ 'coc-clangd',
+    \ 'coc-tsserver'
     \ ]
 
 " Keyboard Mapping
