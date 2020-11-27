@@ -52,7 +52,7 @@ set background=dark
 set colorcolumn=100
 
 " Transparency
-" hi Normal guibg=NONE ctermbg=NONE
+hi Normal guibg=NONE ctermbg=NONE
 
 filetype plugin on
 
@@ -240,7 +240,8 @@ let g:coc_global_extensions = [
     \ 'coc-pairs',
     \ 'coc-go',
     \ 'coc-python',
-    \ 'coc-rome'
+    \ 'coc-clangd',
+    \ 'coc-tsserver'
     \ ]
 
 " Keyboard Mapping
@@ -255,7 +256,7 @@ nnoremap <Leader>n :NERDTree<CR>
 nnoremap <Leader>p :Files<CR>
 
 " :so will source ~/.vimrc
-nnoremap <Leader><CR> :so ~/.vimrc<CR>
+nnoremap <Leader><CR> :so ~/.config/nvim/init.vim<CR>
 
 " Change between windows
 nmap <leader>h :wincmd h<CR>
