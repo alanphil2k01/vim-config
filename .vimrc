@@ -291,3 +291,6 @@ nmap <leader>o o<Esc>k
 
 " A blank line above current line
 nmap <leader>O O<Esc>j
+
+" Create New File
+nmap <leader>e :e %:h/

@@ -276,7 +276,7 @@ nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>ga :Git fetch --all<CR>
 
 " terminal
-nmap <Leader>t :set splitbelow<CR> :14sp<CR> :terminal<CR>
+nmap <Leader>t :set splitbelow<CR> :14sp<CR> :terminal<CR>i
 tnoremap <Esc><Esc> <C-\><C-n>
 tnoremap <Esc>q <C-\><C-n>:q<CR>
 
