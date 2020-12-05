@@ -276,7 +276,7 @@ nnoremap <leader>gp :Gpush<CR>
 nnoremap <leader>ga :Git fetch --all<CR>
 
 " terminal
-nmap <Leader>t <C-w>n:terminal<CR>
+nmap <Leader>t :set splitbelow<CR> :14sp<CR> :terminal<CR>
 tnoremap <Esc><Esc> <C-\><C-n>
 tnoremap <Esc>q <C-\><C-n>:q<CR>
 
@@ -294,3 +294,6 @@ nmap <leader>o o<Esc>k
 
 " A blank line above current line
 nmap <leader>O O<Esc>j
+
+" Create New File
+nmap <leader>e :e %:h/
