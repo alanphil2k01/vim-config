@@ -16,6 +16,7 @@ set undofile
 set clipboard+=unnamedplus
 set autochdir
 set signcolumn=yes
+set encoding=UTF-8
 
 " Set map leader
 let mapleader=" "
@@ -44,6 +45,8 @@ Plug 'stsewd/fzf-checkout.vim'
 Plug 'tpope/vim-fugitive'
 Plug 'preservim/nerdcommenter'
 Plug 'mbbill/undotree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " gruvbox
