@@ -16,7 +16,8 @@ autocmd BufEnter *.js,*.ts,*.sol colorscheme molokai
 autocmd BufEnter *.java colorscheme onedark
 
 " golang
-autocmd BufEnter *.go colorscheme tender
+autocmd BufEnter *.go set notermguicolors
+autocmd BufEnter *.go colorscheme nord
 
 " Airline theme
 autocmd BufEnter * :AirlineRefresh
