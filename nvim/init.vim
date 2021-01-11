@@ -2,22 +2,25 @@ syntax on
 
 " Plugins
 call plug#begin('~/.config/nvim/plugged')
-Plug 'sheerun/vim-polyglot'
-Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
-Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
-Plug 'gruvbox-community/gruvbox'
-Plug 'preservim/nerdtree'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
-Plug 'junegunn/fzf.vim'
-Plug 'stsewd/fzf-checkout.vim'
-Plug 'tpope/vim-fugitive'
-Plug 'mbbill/undotree'
-Plug 'preservim/nerdcommenter'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'vim-airline/vim-airline'
-Plug 'vim-airline/vim-airline-themes'
-Plug 'ryanoasis/vim-devicons'
+    Plug 'sheerun/vim-polyglot'
+    Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
+    Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
+    Plug 'gruvbox-community/gruvbox'
+    Plug 'tomasr/molokai'
+    Plug 'jacoborus/tender.vim'
+    Plug 'joshdick/onedark.vim'
+    Plug 'preservim/nerdtree'
+    Plug 'neoclide/coc.nvim', {'branch': 'release'}
+    Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
+    Plug 'junegunn/fzf.vim'
+    Plug 'stsewd/fzf-checkout.vim'
+    Plug 'tpope/vim-fugitive'
+    Plug 'mbbill/undotree'
+    Plug 'preservim/nerdcommenter'
+    Plug 'Xuyuanp/nerdtree-git-plugin'
+    Plug 'vim-airline/vim-airline'
+    Plug 'vim-airline/vim-airline-themes'
+    Plug 'ryanoasis/vim-devicons'
 call plug#end()
 
 " Set map leader
