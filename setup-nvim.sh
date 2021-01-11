@@ -16,20 +16,16 @@ fi
 clear
 echo "Cloning Repo"
 git clone https://github.com/alanphil2k01/vim-config.git
-cd vim-config
+cd vim-config/nvim
 
-# Checking for requried dirctories
-if [ ! -d "~/.config"]; then
-    mkdir -p ~/.config/nvim
-fi
-if [ ! -d "~/.config/nvim" ]; then
-    mkdir ~/.config/nvim
-fi
+# Creating required directories
+mkdir -p ~/.config/nvim
 
 # Copying config files
 clear
 echo "Copying vim files"
 cp -r init.vim ~/.config/nvim/init.vim
+cp -r plugin ~/.config/nvim/
 
 # Installing vim plug
 clear
@@ -44,7 +40,7 @@ echo "Quit out of after its done by :qall"
 sleep 5
 nvim +PlugInstall
 
-# Installing 
+# Installing coc extensions
 clear
 echo "Opening init.vim to install coc-extensions"
 echo "Once done close out of it with :qall"
