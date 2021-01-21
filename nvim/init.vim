@@ -6,9 +6,9 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'nsf/gocode', { 'rtp': 'nvim', 'do': '~/.config/nvim/plugged/gocode/nvim/symlink.sh' }
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'gruvbox-community/gruvbox'
-    Plug 'tomasr/molokai'
-    Plug 'jacoborus/tender.vim'
+    Plug 'crusoexia/vim-monokai'
     Plug 'joshdick/onedark.vim'
+    Plug 'arcticicestudio/nord-vim'
     Plug 'preservim/nerdtree'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }

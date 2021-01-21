@@ -8,9 +8,7 @@ set background=dark
 hi Normal guibg=NONE
 
 " js, ts and sol files will have monokai
-let g:molokai_original = 1
-let g:rehash256 = 1
-autocmd BufEnter *.js,*.ts,*.sol colorscheme molokai
+autocmd BufEnter *.js,*.ts,*.sol colorscheme monokai
 
 " java
 autocmd BufEnter *.java colorscheme onedark
