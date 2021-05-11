@@ -7,8 +7,6 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
     Plug 'gruvbox-community/gruvbox'
     Plug 'crusoexia/vim-monokai'
-    Plug 'joshdick/onedark.vim'
-    Plug 'arcticicestudio/nord-vim'
     Plug 'preservim/nerdtree'
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
     Plug 'junegunn/fzf', { 'do': { -> fzf#install() } }
@@ -21,6 +19,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'ryanoasis/vim-devicons'
+    Plug 'danilo-augusto/vim-afterglow'
+    Plug 'mattn/emmet-vim'
 call plug#end()
 
 " Set map leader

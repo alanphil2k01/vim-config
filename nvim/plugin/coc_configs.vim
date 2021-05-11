@@ -106,6 +106,7 @@ let g:coc_global_extensions = [
     \ 'coc-java',
     \ 'coc-go',
     \ 'coc-python',
+    \ 'coc-eslint',
     \ 'coc-clangd'
     \ ]
 
