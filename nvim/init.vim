@@ -19,8 +19,8 @@ call plug#begin('~/.config/nvim/plugged')
     Plug 'vim-airline/vim-airline'
     Plug 'vim-airline/vim-airline-themes'
     Plug 'ryanoasis/vim-devicons'
-    Plug 'danilo-augusto/vim-afterglow'
     Plug 'mattn/emmet-vim'
+    Plug 'dracula/vim', { 'as': 'dracula'}
 call plug#end()
 
 " Set map leader
