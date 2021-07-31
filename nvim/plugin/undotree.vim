@@ -1,2 +1,2 @@
 " undotree
-nnoremap <leader>u :UndotreeShow<CR>
+nnoremap <leader>u :UndotreeToggle<CR>
