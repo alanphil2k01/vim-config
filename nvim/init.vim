@@ -74,9 +74,6 @@ nmap <Leader>t :14sp +terminal<CR> i
 tnoremap <Esc><Esc> <C-\><C-n>
 tnoremap <Esc>q <C-\><C-n>:q<CR>
 
-" Delete without overwriting yank
-" vnoremap <leader>d "_dP
-
 " Normalize
 vnoremap <leader>. :norm .<CR>
 
@@ -86,6 +83,7 @@ nmap <leader>o o<Esc>k
 " A blank line above current line
 nmap <leader>O O<Esc>j
 
+" Move selection up or down
 vnoremap J :m '>+1<CR>gv=gv
 vnoremap K :m '<-2<CR>gv=gv
 
@@ -120,4 +118,5 @@ augroup clean_up
     autocmd!
     autocmd BufWritePre * %s/\s\+$//e
     autocmd BufWrite *.go GoFmt
+    autocmd BufWrite *.go GoImports
 augrou END

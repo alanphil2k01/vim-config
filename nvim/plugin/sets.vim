@@ -22,7 +22,6 @@ set signcolumn=yes
 set encoding=UTF-8
 set hidden
 set colorcolumn=100
-set mouse=a
 
 " needed for coc
 set nowritebackup

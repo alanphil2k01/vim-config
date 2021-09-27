@@ -20,11 +20,11 @@ require("telescope").setup({
         buffers = {
             show_all_buffers = true,
             sort_lastused = true,
-            theme = "dropdown",
-            previewer = false,
             mappings = {
                 i = {
                     ["<c-d>"] = require("telescope.actions").delete_buffer,
+                    -- or right hand side can also be the name of the action as string
+                    -- ["<c-d>"] = "delete_buffer",
                 },
                 n = {
                     ["<c-d>"] = require("telescope.actions").delete_buffer,
@@ -87,9 +87,56 @@ local function image_selector(prompt, cwd)
 
             attach_mappings = function(prompt_bufnr, map)
                 select_background(prompt_bufnr, map)
+                return true
+            end,
+        })
+    end
+end
 
-                -- Please continue mapping (attaching additional key maps):
-                -- Ctrl+n/p to move up and down the list.
+local function set_theme(theme_dir, content)
+    local curr_theme = theme_dir.. "/init.lua"
+    local new_theme = theme_dir.. "/" .. content
+    vim.fn.system(
+        "cp " .. new_theme .. " " .. curr_theme
+    )
+    vim.fn.system(
+        "awesome-client 'awesome.restart()'"
+    )
+end
+
+local function select_theme(prompt_bufnr, map)
+    local function set_the_theme(close)
+        local content = require("telescope.actions.state").get_selected_entry(
+            prompt_bufnr
+        )
+        set_theme(content.cwd, content.value)
+        if close then
+            require("telescope.actions").close(prompt_bufnr)
+        end
+    end
+
+    map("i", "<C-p>", function()
+        set_the_theme()
+    end)
+
+    map("i", "<CR>", function()
+        set_the_theme(true)
+    end)
+end
+
+local function theme_selector(prompt, cwd)
+
+    local find_themes ={ "fd", "lua", "-E=init.lua" }
+    -- local find_themes ={ "find", ".", "-path './*.lua'"}
+    return function()
+        require("telescope.builtin").find_files({
+            prompt_title = prompt,
+            cwd = cwd,
+            find_command = find_themes,
+            previewer = false,
+
+            attach_mappings = function(prompt_bufnr, map)
+                select_theme(prompt_bufnr, map)
                 return true
             end,
         })
@@ -97,6 +144,8 @@ local function image_selector(prompt, cwd)
 end
 
 M.wallpaper = image_selector("< Wallpaper > ", "~/Pictures/Wallpapers")
+
+M.theme = theme_selector("< theme > ", "~/.config/awesome/theme")
 
 M.git_branches = function()
     require("telescope.builtin").git_branches({

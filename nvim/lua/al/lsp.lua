@@ -1,18 +1,37 @@
 local function on_attach()
 end
 
--- npm i -g typescript-language-server
+--[[
+sudo pacman -S ccls
+
+rustup +nightly component add rust-analyzer-preview
+
+npm install -g typescript-language-server vim-language-server svelte-language-server pyright bash-language-server
+
+git clone https://github.com/sumneko/lua-language-server ~/Projects/lsp/lua-language-server
+cd ~/Projects/lsp/lua-language-server
+git submodule update --init --recursive
+cd 3rd/luamake
+./compile/install.sh
+cd ../..
+./3rd/luamake/luamake rebuild
+
+GO111MODULE=on go get golang.org/x/tools/gopls@latest
+]]
+
+-- Ts/Js
 require'lspconfig'.tsserver.setup{ on_attach=on_attach }
 
--- npm i -g vim-language-server
+-- viml
 require'lspconfig'.vimls.setup{ on_attach=on_attach }
 
--- package clang or clangd
-require'lspconfig'.clangd.setup {
+-- C/C++
+require'lspconfig'.ccls.setup {
     on_attach = on_attach,
     root_dir = function() return vim.loop.cwd() end
 }
 
+-- Go
 require'lspconfig'.gopls.setup{
     on_attach=on_attach,
     cmd = {"gopls", "serve"},
@@ -27,13 +46,13 @@ require'lspconfig'.gopls.setup{
     },
 }
 
--- rustup +nightly component add rust-analyzer-preview
+-- Rust
 require'lspconfig'.rust_analyzer.setup{ on_attach=on_attach }
 
+-- Lua
+-- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
 local sumneko_root_path = '/home/alan/Projects/lsp/lua-language-server'
 local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
-
--- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
 require'lspconfig'.sumneko_lua.setup {
     on_attach = on_attach,
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
@@ -61,11 +80,11 @@ require'lspconfig'.sumneko_lua.setup {
 }
 
 
--- npm i -g bash-language-server
+-- bash
 require'lspconfig'.bashls.setup { on_attach = on_attach }
 
--- npm i -g svelte-language-server
+-- svelte
 require'lspconfig'.svelte.setup { on_attach = on_attach }
 
--- npm i -g pyright
+-- python
 require'lspconfig'.pyright.setup { on_attach = on_attach }

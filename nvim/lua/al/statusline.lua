@@ -30,7 +30,7 @@ local function split(inputstr, sep)
 end
 
 local function get_file_name()
-    local name = vim.fn.bufname()
+    local name = vim.fn.bufname(0)
 
     if not name or name == "" then
         return "(no name)"
