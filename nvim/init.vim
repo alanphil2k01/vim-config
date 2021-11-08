@@ -19,14 +19,29 @@ call plug#begin('~/.config/nvim-plugins/plugged')
 
     " Theme
     Plug 'gruvbox-community/gruvbox'
-    Plug 'dracula/vim', { 'as': 'dracula'}
 
     " Emmet
     Plug 'mattn/emmet-vim'
 
+    " completion
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-nvim-lua'
+    Plug 'onsails/lspkind-nvim'
+    Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+    Plug 'rafamadriz/friendly-snippets'
+    Plug 'saadparwaiz1/cmp_luasnip'
+
+    " luasnip
+    Plug 'L3MON4D3/LuaSnip'
+
+
     " Lsp
     Plug 'neovim/nvim-lspconfig'
-    Plug 'hrsh7th/nvim-compe'
+
+    Plug 'simrat39/symbols-outline.nvim'
 
     " Treesitter
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -45,10 +60,23 @@ call plug#begin('~/.config/nvim-plugins/plugged')
     Plug 'mbbill/undotree'
     Plug 'preservim/nerdcommenter'
 
-    " GoFmt
+    " Languages
     Plug 'darrikonn/vim-gofmt', { 'do': ':GoUpdateBinaries' }
+    Plug 'tomlion/vim-solidity'
+    Plug 'rust-lang/rust.vim'
 
 call plug#end()
+
+imap <silent><expr> <Tab> luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'
+inoremap <silent> <S-Tab> <cmd>lua require'luasnip'.jump(-1)<Cr>
+
+snoremap <silent> <Tab> <cmd>lua require('luasnip').jump(1)<Cr>
+snoremap <silent> <S-Tab> <cmd>lua require('luasnip').jump(-1)<Cr>
+
+imap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+smap <silent><expr> <C-E> luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'
+
+nnoremap <silent> Q <nop>
 
 " Set map leader
 let mapleader=" "
@@ -102,6 +130,9 @@ nnoremap Y y$
 " delete to non-existance
 nnoremap <leader>d "_d
 vnoremap <leader>d "_d
+
+" save as root
+nnoremap <leader>W :w !sudo tee %
 
 inoremap <C-c> <esc>
 
