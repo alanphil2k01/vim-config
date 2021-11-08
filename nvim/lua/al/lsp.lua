@@ -1,39 +1,100 @@
-local function on_attach()
+-- lspconfig's CONFIG.md https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
+
+local cmp = require'cmp'
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+local function config(_config)
+	return vim.tbl_deep_extend("force", {
+		capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+	}, _config or {})
 end
 
---[[
-sudo pacman -S ccls
+cmp.setup({
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        end,
+    },
+    mapping = {
+        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
+        ["<C-d>"] = cmp.mapping.scroll_docs(4),
+        ["<C-e>"] = cmp.mapping.close(),
+        ["<c-y>"] = cmp.mapping(
+        cmp.mapping.confirm {
+            behavior = cmp.ConfirmBehavior.Insert,
+            select = true,
+        },
+        { "i", "c" }
+        ),
 
-rustup +nightly component add rust-analyzer-preview
+        ["<c-space>"] = cmp.mapping {
+            i = cmp.mapping.complete(),
+            c = function(
+                _ --[[fallback]]
+                )
+                if cmp.visible() then
+                    if not cmp.confirm { select = true } then
+                        return
+                    end
+                else
+                    cmp.complete()
+                end
+            end,
+        },
 
-npm install -g typescript-language-server vim-language-server svelte-language-server pyright bash-language-server
+        ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    },
+    sources = {
+        { name = "cmp_tabnine" },
+        { name = "nvim_lua" },
+        { name = "zsh" },
+        { name = "nvim_lsp" },
+        { name = "path" },
+        { name = "luasnip" },
+        { name = "buffer", keyword_length = 4 },
+    },
+    experimental = {
+        native_menu = false,
+        ghost_text = true
+    },
+    formatting = {
+        format = require'lspkind'.cmp_format {
+            with_text = true,
+            menu = {
+                buffer = "[Buf]",
+                nvim_lsp = "[LSP]",
+                nvim_lua = "[Lua]",
+                path = "[path]",
+                luasnip = "[snip]",
+                cmp_tabnine = "[TabNine]",
+            },
+        },
+    }
+})
 
-git clone https://github.com/sumneko/lua-language-server ~/Projects/lsp/lua-language-server
-cd ~/Projects/lsp/lua-language-server
-git submodule update --init --recursive
-cd 3rd/luamake
-./compile/install.sh
-cd ../..
-./3rd/luamake/luamake rebuild
-
-GO111MODULE=on go get golang.org/x/tools/gopls@latest
-]]
+local tabnine = require('cmp_tabnine.config')
+tabnine:setup({
+    max_lines = 1000,
+    max_num_results = 20,
+    sort = true,
+	run_on_every_keystroke = true,
+	snippet_placeholder = '..',
+})
 
 -- Ts/Js
-require'lspconfig'.tsserver.setup{ on_attach=on_attach }
+require'lspconfig'.tsserver.setup(config())
 
 -- viml
-require'lspconfig'.vimls.setup{ on_attach=on_attach }
+require'lspconfig'.vimls.setup(config())
 
 -- C/C++
-require'lspconfig'.ccls.setup {
-    on_attach = on_attach,
+require'lspconfig'.ccls.setup(config({
     root_dir = function() return vim.loop.cwd() end
-}
+}))
 
 -- Go
-require'lspconfig'.gopls.setup{
-    on_attach=on_attach,
+require'lspconfig'.gopls.setup(config({
     cmd = {"gopls", "serve"},
     root_dir = function() return vim.loop.cwd() end,
     settings = {
@@ -44,17 +105,16 @@ require'lspconfig'.gopls.setup{
             staticcheck = true,
         },
     },
-}
+}))
 
 -- Rust
-require'lspconfig'.rust_analyzer.setup{ on_attach=on_attach }
+require'lspconfig'.rust_analyzer.setup(config())
 
 -- Lua
 -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
 local sumneko_root_path = '/home/alan/Projects/lsp/lua-language-server'
 local sumneko_binary = sumneko_root_path .. "/bin/Linux/lua-language-server"
-require'lspconfig'.sumneko_lua.setup {
-    on_attach = on_attach,
+require'lspconfig'.sumneko_lua.setup(config({
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
     settings = {
         Lua = {
@@ -77,14 +137,48 @@ require'lspconfig'.sumneko_lua.setup {
             },
         },
     },
-}
+}))
 
 
 -- bash
-require'lspconfig'.bashls.setup { on_attach = on_attach }
+require'lspconfig'.bashls.setup (config())
 
 -- svelte
-require'lspconfig'.svelte.setup { on_attach = on_attach }
+require'lspconfig'.svelte.setup (config())
 
 -- python
-require'lspconfig'.pyright.setup { on_attach = on_attach }
+require'lspconfig'.pyright.setup (config())
+
+local opts = {
+	-- whether to highlight the currently hovered symbol
+	-- disable if your cpu usage is higher than you want it
+	-- or you just hate the highlight
+	-- default: true
+	highlight_hovered_item = true,
+
+	-- whether to show outline guides
+	-- default: true
+	show_guides = true,
+}
+
+require("symbols-outline").setup(opts)
+
+local snippets_paths = function()
+	local plugins = { "friendly-snippets" }
+	local paths = {}
+	local path
+	local root_path = vim.env.HOME .. "/.vim/plugged/"
+	for _, plug in ipairs(plugins) do
+		path = root_path .. plug
+		if vim.fn.isdirectory(path) ~= 0 then
+			table.insert(paths, path)
+		end
+	end
+	return paths
+end
+
+require("luasnip.loaders.from_vscode").lazy_load({
+	paths = snippets_paths(),
+	include = nil, -- Load all languages
+	exclude = {},
+})

@@ -24,9 +24,24 @@ call plug#begin('~/.config/nvim-plugins/plugged')
     " Emmet
     Plug 'mattn/emmet-vim'
 
+    " completion
+    Plug 'hrsh7th/nvim-cmp'
+    Plug 'hrsh7th/cmp-buffer'
+    Plug 'hrsh7th/cmp-path'
+    Plug 'hrsh7th/cmp-cmdline'
+    Plug 'hrsh7th/cmp-nvim-lsp'
+    Plug 'hrsh7th/cmp-nvim-lua'
+    Plug 'onsails/lspkind-nvim'
+    Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
+    Plug 'rafamadriz/friendly-snippets'
+
+    " luasnip
+    Plug 'L3MON4D3/LuaSnip'
+
     " Lsp
     Plug 'neovim/nvim-lspconfig'
-    Plug 'hrsh7th/nvim-compe'
+
+    Plug 'simrat39/symbols-outline.nvim'
 
     " Treesitter
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
@@ -45,8 +60,10 @@ call plug#begin('~/.config/nvim-plugins/plugged')
     Plug 'mbbill/undotree'
     Plug 'preservim/nerdcommenter'
 
-    " GoFmt
+    " Languages
     Plug 'darrikonn/vim-gofmt', { 'do': ':GoUpdateBinaries' }
+    Plug 'tomlion/vim-solidity'
+    Plug 'rust-lang/rust.vim'
 
 call plug#end()
 
