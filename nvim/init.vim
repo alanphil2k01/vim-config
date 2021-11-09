@@ -37,14 +37,13 @@ call plug#begin('~/.config/nvim-plugins/plugged')
     " luasnip
     Plug 'L3MON4D3/LuaSnip'
 
-
     " Lsp
     Plug 'neovim/nvim-lspconfig'
 
     Plug 'simrat39/symbols-outline.nvim'
 
     " Treesitter
-    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
+    Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/playground',
 
     " Telescope
