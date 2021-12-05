@@ -57,7 +57,9 @@ call plug#begin('~/.config/nvim-plugins/plugged')
 
     " Undotree
     Plug 'mbbill/undotree'
-    Plug 'preservim/nerdcommenter'
+
+    " Commenter
+    Plug 'numToStr/Comment.nvim'
 
     " Languages
     Plug 'darrikonn/vim-gofmt', { 'do': ':GoUpdateBinaries' }
@@ -99,6 +101,8 @@ nmap <leader>l :wincmd l<CR>
 " terminal
 nmap <Leader>t :14sp +terminal<CR> i
 tnoremap <Esc><Esc> <C-\><C-n>
+tnoremap <C-j> <C-\><C-n>:wincmd j<CR>
+tnoremap <C-k> <C-\><C-n>:wincmd k<CR>
 tnoremap <Esc>q <C-\><C-n>:q<CR>
 
 " Normalize
@@ -131,7 +135,7 @@ nnoremap <leader>d "_d
 vnoremap <leader>d "_d
 
 " save as root
-nnoremap <leader>W :w !sudo tee %
+nnoremap <leader>W :w !sudo tee %<CR>
 
 inoremap <C-c> <esc>
 
