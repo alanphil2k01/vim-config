@@ -65,7 +65,6 @@ call plug#begin('~/.config/nvim-plugins/plugged')
     Plug 'numToStr/Comment.nvim'
 
     " Languages
-    Plug 'darrikonn/vim-gofmt', { 'do': ':GoUpdateBinaries' }
     Plug 'tomlion/vim-solidity'
     Plug 'rust-lang/rust.vim'
 
@@ -151,9 +150,9 @@ augroup highlight_yank
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
 augroup END
 
+autocmd BufWritePre *.go lua goimports(1000)
+
 augroup clean_up
     autocmd!
     autocmd BufWritePre * %s/\s\+$//e
-    autocmd BufWrite *.go GoFmt
-    autocmd BufWrite *.go GoImports
 augrou END

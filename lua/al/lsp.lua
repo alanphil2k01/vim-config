@@ -1,5 +1,6 @@
 -- lspconfig's CONFIG.md https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
 local cmp = require'cmp'
+local util = require'lspconfig.util'
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
 
@@ -84,14 +85,13 @@ require'lspconfig'.ccls.setup(config({
 -- Go
 require'lspconfig'.gopls.setup(config({
     cmd = {"gopls", "serve"},
-    root_dir = function() return vim.loop.cwd() end,
     settings = {
-        gopls = {
-            analyses = {
-                unusedparams = true,
-            },
-            staticcheck = true,
+      gopls = {
+        analyses = {
+          unusedparams = true,
         },
+        staticcheck = true,
+      },
     },
 }))
 
