@@ -19,6 +19,8 @@ call plug#begin('~/.config/nvim-plugins/plugged')
 
     " Theme
     Plug 'gruvbox-community/gruvbox'
+    Plug 'sickill/vim-monokai'
+    Plug 'rebelot/kanagawa.nvim'
 
     " Emmet
     Plug 'mattn/emmet-vim'
@@ -40,8 +42,6 @@ call plug#begin('~/.config/nvim-plugins/plugged')
     " Lsp
     Plug 'neovim/nvim-lspconfig'
 
-    Plug 'simrat39/symbols-outline.nvim'
-
     " Treesitter
     Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
     Plug 'nvim-treesitter/playground',
@@ -49,6 +49,7 @@ call plug#begin('~/.config/nvim-plugins/plugged')
     " lualine
     Plug 'nvim-lualine/lualine.nvim'
     Plug 'kyazdani42/nvim-web-devicons'
+
     " Telescope
     Plug 'nvim-lua/popup.nvim'
     Plug 'nvim-lua/plenary.nvim'
@@ -150,9 +151,8 @@ augroup highlight_yank
     autocmd TextYankPost * silent! lua require'vim.highlight'.on_yank({timeout = 40})
 augroup END
 
-autocmd BufWritePre *.go lua goimports(1000)
-
 augroup clean_up
     autocmd!
     autocmd BufWritePre * %s/\s\+$//e
+    autocmd BufWritePre *.go lua goimports(1000)
 augrou END

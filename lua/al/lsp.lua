@@ -36,9 +36,9 @@ cmp.setup({
         },
     },
     sources = {
+        { name = "nvim_lsp" },
         { name = "cmp_tabnine" },
         { name = "nvim_lua" },
-        { name = "nvim_lsp" },
         { name = "path" },
         { name = "luasnip" },
         { name = "buffer", keyword_length = 4 },
@@ -56,7 +56,7 @@ cmp.setup({
                 nvim_lua = "[Lua]",
                 path = "[path]",
                 luasnip = "[snip]",
-                cmp_tabnine = "[TabNine]",
+                cmp_tabnine = "[TN]",
             },
         },
     }
@@ -76,6 +76,9 @@ require'lspconfig'.tsserver.setup(config())
 
 -- viml
 require'lspconfig'.vimls.setup(config())
+
+-- solidity-language-server
+require'lspconfig'.solidity_ls.setup(config())
 
 -- C/C++
 require'lspconfig'.ccls.setup(config({
@@ -136,20 +139,6 @@ require'lspconfig'.svelte.setup (config())
 
 -- python
 require'lspconfig'.pyright.setup (config())
-
-local opts = {
-	-- whether to highlight the currently hovered symbol
-	-- disable if your cpu usage is higher than you want it
-	-- or you just hate the highlight
-	-- default: true
-	highlight_hovered_item = true,
-
-	-- whether to show outline guides
-	-- default: true
-	show_guides = true,
-}
-
-require("symbols-outline").setup(opts)
 
 local snippets_paths = function()
 	local plugins = { "friendly-snippets" }

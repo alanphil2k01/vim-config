@@ -1,4 +1,5 @@
-let g:my_colorscheme = "gruvbox"
+let g:my_colorscheme = "kanagawa"
+
 fun! ColorMyVim()
     let g:gruvbox_contrast_dark = 'hard'
     if exists('+termguicolors')
@@ -8,23 +9,43 @@ fun! ColorMyVim()
     let g:gruvbox_invert_selection='0'
 
     set background=dark
-    if has('nvim')
-        call luaeval('vim.cmd("colorscheme " .. _A[1])', [g:my_colorscheme])
-    else
-        colorscheme gruvbox
-    endif
+    call luaeval('vim.cmd("colorscheme " .. _A[1])', [g:my_colorscheme])
 
-    highlight ColorColumn ctermbg=0 guibg=grey
+    hi ColorColumn ctermbg=0 guibg=grey
     hi SignColumn guibg=none
     hi CursorLineNR guibg=None
-    highlight Normal guibg=none
-    highlight netrwDir guifg=#5eacd3
-    highlight LineNr guifg=#5eacd3
-    highlight netrwDir guifg=#5eacd3
-    highlight qfFileName guifg=#aed75f
+    hi Normal guibg=none
+    hi netrwDir guifg=#5eacd3
+    hi LineNr guifg=#5eacd3
+    hi LineNr guibg=none
+    hi netrwDir guifg=#5eacd3
+    hi qfFileName guifg=#aed75f
     hi TelescopeBorder guifg=#5eacd
 endfun
-call ColorMyVim()
 
 nnoremap <leader>cwm :call ColorMyVim()<CR>
-nnoremap <leader>vwb :let g:my_colorscheme = ""<Left>
+nnoremap <leader>vwm :let g:my_colorscheme = ""<Left>
+
+lua << EOF
+-- Default options:
+require('kanagawa').setup({
+    undercurl = true,
+    commentStyle = "italic",
+    functionStyle = "NONE",
+    keywordStyle = "italic",
+    statementStyle = "bold",
+    typeStyle = "NONE",
+    variablebuiltinStyle = "italic",
+    specialReturn = true,
+    specialException = true,
+    transparent = false,
+    dimInactive = false,
+    colors = {
+        samuraiRed = "#FF3232"
+    },
+    overrides = {},
+})
+EOF
+
+
+call ColorMyVim()
