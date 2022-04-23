@@ -1,6 +1,6 @@
-# My vim config
+# Neovim Config
 
 ## Setup
 ``` sh
-    curl https://raw.githubusercontent.com/alanphil2k01/vim-config/master/setup_nvim.sh | bash
+curl https://raw.githubusercontent.com/alanphil2k01/vim-config/master/setup_nvim.sh | bash
 ```
