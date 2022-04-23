@@ -1,9 +1,12 @@
 local actions = require("telescope.actions")
+local telescope_builtin = require("telescope.builtin")
+
 require("telescope").setup({
     defaults = {
         file_sorter = require("telescope.sorters").get_fzy_sorter,
         prompt_prefix = " >",
         color_devicons = true,
+        file_ignore_patterns = { "^./.git/", "^node_modules/" },
 
         file_previewer = require("telescope.previewers").vim_buffer_cat.new,
         grep_previewer = require("telescope.previewers").vim_buffer_vimgrep.new,
@@ -42,11 +45,10 @@ require("telescope").setup({
 
 require("telescope").load_extension("fzy_native")
 
-local M = {}
-M.search_dotfiles = function()
+local function search_dotfiles ()
     require("telescope.builtin").find_files({
         prompt_title = "< VimRC >",
-        cwd = vim.env.DOTFILES,
+        cwd = vim.env.HOME .. "/.config/nvim",
         hidden = true,
     })
 end
@@ -79,8 +81,9 @@ local function select_background(prompt_bufnr, map)
 end
 
 local function image_selector(prompt, cwd)
+    print(cwd)
     return function()
-        require("telescope.builtin").find_files({
+        telescope_builtin.find_files({
             prompt_title = prompt,
             cwd = cwd,
             previewer = false,
@@ -93,20 +96,9 @@ local function image_selector(prompt, cwd)
     end
 end
 
-local function set_theme(theme_dir, content)
-    local curr_theme = theme_dir.. "/init.lua"
-    local new_theme = theme_dir.. "/" .. content
-    vim.fn.system(
-        "cp " .. new_theme .. " " .. curr_theme
-    )
-    vim.fn.system(
-        "awesome-client 'awesome.restart()'"
-    )
-end
+local set_wallpaper = image_selector("< Wallpaper > ", "~/Pictures/Wallpapers")
 
-M.wallpaper = image_selector("< Wallpaper > ", "~/Pictures/Wallpapers")
-
-M.git_branches = function()
+local function git_branches ()
     require("telescope.builtin").git_branches({
         attach_mappings = function(_, map)
             map("i", "<c-d>", actions.git_delete_branch)
@@ -116,4 +108,12 @@ M.git_branches = function()
     })
 end
 
-return M
+Set_keymap("n", "<leader>ps", "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input(\"Grep For > \")})<CR>", { noremap = true })
+Set_keymap("n", "<leader>pw", "<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand(\"<cword>\") }<CR>", { noremap = true })
+Set_keymap("n", "<C-p>", telescope_builtin.git_files, { noremap = true })
+Set_keymap("n", "<Leader>pf", telescope_builtin.find_files, { noremap = true })
+Set_keymap("n", "<leader>pb", telescope_builtin.buffers, { noremap = true })
+Set_keymap("n", "<leader>vh", telescope_builtin.help_tags, { noremap = true })
+Set_keymap("n", "<leader>va", set_wallpaper, { noremap = true })
+Set_keymap("n", "<leader>vd", search_dotfiles, { noremap = true })
+Set_keymap("n", "<leader>gb", git_branches, { noremap = true })

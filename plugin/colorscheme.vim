@@ -26,26 +26,4 @@ endfun
 nnoremap <leader>cwm :call ColorMyVim()<CR>
 nnoremap <leader>vwm :let g:my_colorscheme = ""<Left>
 
-lua << EOF
--- Default options:
-require('kanagawa').setup({
-    undercurl = true,
-    commentStyle = "italic",
-    functionStyle = "NONE",
-    keywordStyle = "italic",
-    statementStyle = "bold",
-    typeStyle = "NONE",
-    variablebuiltinStyle = "italic",
-    specialReturn = true,
-    specialException = true,
-    transparent = false,
-    dimInactive = false,
-    colors = {
-        samuraiRed = "#FF3232"
-    },
-    overrides = {},
-})
-EOF
-
-
 call ColorMyVim()

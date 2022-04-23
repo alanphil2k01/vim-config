@@ -1,64 +1,75 @@
 -- lspconfig's CONFIG.md https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
-local cmp = require'cmp'
-local util = require'lspconfig.util'
+local cmp = require('cmp')
+local lspkind = require('lspkind')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
+
+vim.opt.completeopt={ "menu", "menuone", "noselect" }
+vim.g.completion_matching_strategy_list = {"exact", "substring", "fuzzy"}
 
 local function config(_config)
 	return vim.tbl_deep_extend("force", {
 		capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
+		on_attach = function()
+			Set_keymap("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
+			Set_keymap("n", "gD", vim.lsp.buf.type_definition, { buffer = 0 })
+			Set_keymap("n", "gi", vim.lsp.buf.implementation, { buffer = 0 })
+			Set_keymap("n", "K", vim.lsp.buf.hover, { buffer = 0 })
+			Set_keymap("n", "<leader>vws", vim.lsp.buf.workspace_symbol, { buffer = 0 })
+			Set_keymap("n", "<leader>dv", vim.diagnostic.open_float, { buffer = 0 })
+			Set_keymap("n", "<C-n>", vim.lsp.diagnostic.goto_next, { buffer = 0 })
+			Set_keymap("n", "<leader>dp", vim.lsp.diagnostic.goto_prev, { buffer = 0 })
+			Set_keymap("n", "<leader>dl", "<cmd>Telescope diagnostics<CR>", { buffer = 0 })
+			Set_keymap("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
+			Set_keymap("n", "<leader>rr", vim.lsp.buf.references, { buffer = 0 })
+			Set_keymap("n", "<leader>rn", vim.lsp.buf.rename, { buffer = 0 })
+			Set_keymap("n", "<leader>vh", vim.lsp.buf.signature_help, { buffer = 0 })
+		end,
 	}, _config or {})
 end
+
+local source_mapping = {
+	buffer = "[Buffer]",
+	nvim_lsp = "[LSP]",
+	nvim_lua = "[Lua]",
+	cmp_tabnine = "[TN]",
+	path = "[Path]",
+}
 
 cmp.setup({
     snippet = {
         expand = function(args)
-            require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+            require('luasnip').lsp_expand(args.body)
         end,
     },
-    mapping = {
-        ["<C-u>"] = cmp.mapping.scroll_docs(-4),
-        ["<C-d>"] = cmp.mapping.scroll_docs(4),
-        ["<C-e>"] = cmp.mapping.close(),
-        ["<c-space>"] = cmp.mapping {
-            i = cmp.mapping.complete(),
-            c = function(
-                _ --[[fallback]]
-                )
-                if cmp.visible() then
-                    if not cmp.confirm { select = true } then
-                        return
-                    end
-                else
-                    cmp.complete()
-                end
-            end,
-        },
-    },
+    mapping = cmp.mapping.preset.insert({
+      ['<C-u>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-d>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      -- ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    }),
     sources = {
-        { name = "nvim_lsp" },
         { name = "cmp_tabnine" },
+        { name = "nvim_lsp" },
         { name = "nvim_lua" },
         { name = "path" },
         { name = "luasnip" },
         { name = "buffer", keyword_length = 4 },
     },
-    experimental = {
-        native_menu = false,
-        ghost_text = true
-    },
     formatting = {
-        format = require'lspkind'.cmp_format {
-            with_text = true,
-            menu = {
-                buffer = "[Buf]",
-                nvim_lsp = "[LSP]",
-                nvim_lua = "[Lua]",
-                path = "[path]",
-                luasnip = "[snip]",
-                cmp_tabnine = "[TN]",
-            },
-        },
+        format = function(entry, vim_item)
+			vim_item.kind = lspkind.presets.default[vim_item.kind]
+			local menu = source_mapping[entry.source.name]
+			if entry.source.name == "cmp_tabnine" then
+				if entry.completion_item.data ~= nil and entry.completion_item.data.detail ~= nil then
+					menu = entry.completion_item.data.detail .. " " .. menu
+				end
+				vim_item.kind = ""
+			end
+			vim_item.menu = menu
+			return vim_item
+		end,
     }
 })
 
@@ -81,11 +92,12 @@ require'lspconfig'.vimls.setup(config())
 require'lspconfig'.solidity_ls.setup(config())
 
 -- C/C++
-require'lspconfig'.ccls.setup(config({
+require'lspconfig'.clangd.setup(config({
     root_dir = function() return vim.loop.cwd() end
 }))
 
 -- Go
+require('go').setup()
 require'lspconfig'.gopls.setup(config({
     cmd = {"gopls", "serve"},
     settings = {

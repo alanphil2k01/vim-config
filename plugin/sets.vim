@@ -8,14 +8,12 @@ set scrolloff=8
 set tabstop=4 softtabstop=4
 set shiftwidth=4
 set expandtab
-" set noshowmode
 set showtabline=2
 set nowrap
 set noswapfile
 set nobackup
 set undofile
 set undodir=~/.config/nvim-plugins/undodir
-" set clipboard+=unnamedplus
 set splitbelow
 set termguicolors
 set signcolumn=yes
