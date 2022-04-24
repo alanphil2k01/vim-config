@@ -1,4 +1,4 @@
--- lspconfig's CONFIG.md https://github.com/neovim/nvim-lspconfig/blob/master/CONFIG.md
+-- lspconfig's server_configurations.md https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local cmp = require('cmp')
 local lspkind = require('lspkind')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -97,7 +97,6 @@ require'lspconfig'.clangd.setup(config({
 }))
 
 -- Go
-require('go').setup()
 require'lspconfig'.gopls.setup(config({
     cmd = {"gopls", "serve"},
     settings = {

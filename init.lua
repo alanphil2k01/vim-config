@@ -42,6 +42,7 @@ vim.cmd[[
         " Treesitter
         Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
         Plug 'nvim-treesitter/playground',
+        Plug 'romgrk/nvim-treesitter-context'
 
         " lualine
         Plug 'nvim-lualine/lualine.nvim'
@@ -82,7 +83,8 @@ vim.cmd[[
     augroup clean_up
         autocmd!
         autocmd BufWritePre * %s/\s\+$//e
-        autocmd BufWritePre *.go silent! lua require('go.format').goimport()
+        autocmd BufEnter *.go :lua require('go').setup()
+        autocmd BufWritePre *.go :silent! lua require('go.format').goimport()
     augrou END
 ]]
 

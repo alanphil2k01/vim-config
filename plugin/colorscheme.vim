@@ -1,4 +1,4 @@
-let g:my_colorscheme = "kanagawa"
+let g:my_colorscheme = "gruvbox"
 
 fun! ColorMyVim()
     let g:gruvbox_contrast_dark = 'hard'

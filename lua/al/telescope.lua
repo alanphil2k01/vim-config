@@ -81,7 +81,6 @@ local function select_background(prompt_bufnr, map)
 end
 
 local function image_selector(prompt, cwd)
-    print(cwd)
     return function()
         telescope_builtin.find_files({
             prompt_title = prompt,
