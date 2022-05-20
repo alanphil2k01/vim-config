@@ -147,7 +147,7 @@ Set_keymap("v", "<leader>p", "\"_dP", { noremap = true })
 -- Paste from clipboard
 Set_keymap("n", "<leader>p", "\"+p", { noremap = true })
 
--- next greatest remap ever : asbjornHaland
+-- yank remaps
 Set_keymap("n", "<leader>y", "\"+y", { noremap = true })
 Set_keymap("v", "<leader>y", "\"+y", { noremap = true })
 Set_keymap("n", "<leader>Y", "gg\"+yG", { noremap = true })
@@ -157,8 +157,14 @@ Set_keymap("n", "Y", "y$", { noremap = true })
 Set_keymap("n", "<leader>d", "\"_d", { noremap = true })
 Set_keymap("v", "<leader>d", "\"_d", { noremap = true })
 
+-- make it executable
+Set_keymap("n", "<leader>x", "<cmd>!chmod +x %<CR>", { noremap = true })
+
 -- save as root
 Set_keymap("n", "<leader>W", ":w !sudo tee %<CR>", { noremap = true })
+
+-- run tmux-sessionizer
+Set_keymap("n", "<C-f>", ":silent !tmux neww tmux-sessionizer<CR>", { noremap = true })
 
 Set_keymap("i", "<C-c>", "<esc>", { noremap = true })
 
