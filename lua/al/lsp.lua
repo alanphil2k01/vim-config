@@ -17,8 +17,8 @@ local function config(_config)
 			Set_keymap("n", "K", vim.lsp.buf.hover, { buffer = 0 })
 			Set_keymap("n", "<leader>vws", vim.lsp.buf.workspace_symbol, { buffer = 0 })
 			Set_keymap("n", "<leader>dv", vim.diagnostic.open_float, { buffer = 0 })
-			Set_keymap("n", "<C-n>", vim.lsp.diagnostic.goto_next, { buffer = 0 })
-			Set_keymap("n", "<leader>dp", vim.lsp.diagnostic.goto_prev, { buffer = 0 })
+			Set_keymap("n", "<C-n>", vim.diagnostic.goto_next, { buffer = 0 })
+			Set_keymap("n", "<leader>dp", vim.diagnostic.goto_prev, { buffer = 0 })
 			Set_keymap("n", "<leader>dl", "<cmd>Telescope diagnostics<CR>", { buffer = 0 })
 			Set_keymap("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
 			Set_keymap("n", "<leader>rr", vim.lsp.buf.references, { buffer = 0 })
@@ -94,7 +94,7 @@ require'lspconfig'.solidity_ls.setup(config())
 -- C/C++
 require'lspconfig'.ccls.setup(config({
     root_dir = function() return vim.loop.cwd() end,
-    cmd = {"clangd", "--background-index"},
+    cmd = {"clangd", "--background-index","--enable-config", "--all-scopes-completion"},
 }))
 
 -- Go
