@@ -92,7 +92,7 @@ require'lspconfig'.vimls.setup(config())
 require'lspconfig'.solidity_ls.setup(config())
 
 -- C/C++
-require'lspconfig'.ccls.setup(config({
+require'lspconfig'.clangd.setup(config({
     root_dir = function() return vim.loop.cwd() end,
     cmd = {"clangd", "--background-index","--enable-config", "--all-scopes-completion"},
 }))
