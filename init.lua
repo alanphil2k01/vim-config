@@ -19,6 +19,7 @@ vim.cmd[[
     call plug#begin('~/.config/nvim-plugins/plugged')
         " Themes
         Plug 'gruvbox-community/gruvbox'
+        Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
         Plug 'sickill/vim-monokai'
         Plug 'rebelot/kanagawa.nvim'
 
@@ -85,6 +86,7 @@ vim.cmd[[
         autocmd BufWritePre * %s/\s\+$//e
         autocmd BufEnter *.go :lua require('go').setup()
         autocmd BufWritePre *.go :silent! lua require('go.format').goimport()
+        autocmd BufWritePre *.tsx,*.ts,*.jsx,*.js EslintFixAll
     augrou END
 ]]
 

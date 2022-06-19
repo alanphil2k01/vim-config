@@ -7,23 +7,24 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 vim.opt.completeopt={ "menu", "menuone", "noselect" }
 vim.g.completion_matching_strategy_list = {"exact", "substring", "fuzzy"}
 
+Set_keymap("n", "gd", vim.lsp.buf.definition)
+Set_keymap("n", "gD", vim.lsp.buf.type_definition)
+Set_keymap("n", "gi", vim.lsp.buf.implementation)
+Set_keymap("n", "K", vim.lsp.buf.hover)
+Set_keymap("n", "<leader>vws", vim.lsp.buf.workspace_symbol)
+Set_keymap("n", "<leader>dv", vim.diagnostic.open_float)
+Set_keymap("n", "<C-n>", vim.diagnostic.goto_next)
+Set_keymap("n", "<leader>dp", vim.diagnostic.goto_prev)
+Set_keymap("n", "<leader>dl", "<cmd>Telescope diagnostics<CR>")
+Set_keymap("n", "<leader>ca", vim.lsp.buf.code_action)
+Set_keymap("n", "<leader>rr", vim.lsp.buf.references)
+Set_keymap("n", "<leader>rn", vim.lsp.buf.rename)
+Set_keymap("n", "<leader>vh", vim.lsp.buf.signature_help)
+
 local function config(_config)
 	return vim.tbl_deep_extend("force", {
 		capabilities = require("cmp_nvim_lsp").update_capabilities(vim.lsp.protocol.make_client_capabilities()),
 		on_attach = function()
-			Set_keymap("n", "gd", vim.lsp.buf.definition, { buffer = 0 })
-			Set_keymap("n", "gD", vim.lsp.buf.type_definition, { buffer = 0 })
-			Set_keymap("n", "gi", vim.lsp.buf.implementation, { buffer = 0 })
-			Set_keymap("n", "K", vim.lsp.buf.hover, { buffer = 0 })
-			Set_keymap("n", "<leader>vws", vim.lsp.buf.workspace_symbol, { buffer = 0 })
-			Set_keymap("n", "<leader>dv", vim.diagnostic.open_float, { buffer = 0 })
-			Set_keymap("n", "<C-n>", vim.diagnostic.goto_next, { buffer = 0 })
-			Set_keymap("n", "<leader>dp", vim.diagnostic.goto_prev, { buffer = 0 })
-			Set_keymap("n", "<leader>dl", "<cmd>Telescope diagnostics<CR>", { buffer = 0 })
-			Set_keymap("n", "<leader>ca", vim.lsp.buf.code_action, { buffer = 0 })
-			Set_keymap("n", "<leader>rr", vim.lsp.buf.references, { buffer = 0 })
-			Set_keymap("n", "<leader>rn", vim.lsp.buf.rename, { buffer = 0 })
-			Set_keymap("n", "<leader>vh", vim.lsp.buf.signature_help, { buffer = 0 })
 		end,
 	}, _config or {})
 end
@@ -45,7 +46,7 @@ cmp.setup({
     mapping = cmp.mapping.preset.insert({
       ['<C-u>'] = cmp.mapping.scroll_docs(-4),
       ['<C-d>'] = cmp.mapping.scroll_docs(4),
-      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-Space>'] = cmp.mapping.complete({}),
       ['<C-e>'] = cmp.mapping.abort(),
       -- ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
     }),
@@ -84,6 +85,7 @@ tabnine:setup({
 
 -- Ts/Js
 require'lspconfig'.tsserver.setup(config())
+require'lspconfig'.eslint.setup(config())
 
 -- viml
 require'lspconfig'.vimls.setup(config())
@@ -93,8 +95,13 @@ require'lspconfig'.solidity_ls.setup(config())
 
 -- C/C++
 require'lspconfig'.clangd.setup(config({
-    root_dir = function() return vim.loop.cwd() end,
-    cmd = {"clangd", "--background-index","--enable-config", "--all-scopes-completion"},
+    cmd = {
+        "clangd",
+        "--enable-config",
+        "--suggest-missing-includes",
+        "--clang-tidy",
+        "--header-insertion=iwyu"
+    },
 }))
 
 -- Go

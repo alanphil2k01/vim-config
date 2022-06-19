@@ -1,4 +1,14 @@
-let g:my_colorscheme = "gruvbox"
+let g:my_colorscheme = "tokyonight"
+
+let g:tokyonight_style = "night"
+let g:tokyonight_italic_functions = 1
+let g:tokyonight_transparent = 1
+let g:tokyonight_dark_float = 1
+
+let g:tokyonight_colors = {
+  \ 'hint': 'orange',
+  \ 'error': '#ff0000',
+\ }
 
 fun! ColorMyVim()
     let g:gruvbox_contrast_dark = 'hard'
@@ -25,5 +35,6 @@ endfun
 
 nnoremap <leader>cwm :call ColorMyVim()<CR>
 nnoremap <leader>vwm :let g:my_colorscheme = ""<Left>
+
 
 call ColorMyVim()
