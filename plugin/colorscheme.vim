@@ -1,4 +1,4 @@
-let g:my_colorscheme = "tokyonight"
+let g:my_colorscheme = "kanagawa"
 
 let g:tokyonight_style = "night"
 let g:tokyonight_italic_functions = 1
@@ -31,6 +31,8 @@ fun! ColorMyVim()
     hi netrwDir guifg=#5eacd3
     hi qfFileName guifg=#aed75f
     hi TelescopeBorder guifg=#5eacd
+    hi TelescopeBorder guibg=None
+    hi TelescopeNormal guibg=None
 endfun
 
 nnoremap <leader>cwm :call ColorMyVim()<CR>

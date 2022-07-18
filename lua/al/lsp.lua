@@ -94,6 +94,18 @@ require'lspconfig'.vimls.setup(config())
 require'lspconfig'.solidity_ls.setup(config())
 
 -- C/C++
+-- require'lspconfig'.ccls.setup {
+--   init_options = {
+--     compilationDatabaseDirectory = "build";
+--     index = {
+--       threads = 0;
+--     };
+--     clang = {
+--       excludeArgs = { "-frounding-math"} ;
+--     };
+--   }
+-- }
+
 require'lspconfig'.clangd.setup(config({
     cmd = {
         "clangd",
