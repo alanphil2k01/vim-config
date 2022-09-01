@@ -1,0 +1,4 @@
+-- augroup Setup_Emmet
+--     autocmd!
+--     autocmd FileType typescriptreact,javascriptreact,html,javascript,css,vue EmmetInstall
+-- augroup END

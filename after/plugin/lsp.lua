@@ -1,5 +1,6 @@
 -- lspconfig's server_configurations.md https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md
 local cmp = require('cmp')
+local lspconfig = require('lspconfig')
 local lspkind = require('lspkind')
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities.textDocument.completion.completionItem.snippetSupport = true
@@ -7,19 +8,19 @@ capabilities.textDocument.completion.completionItem.snippetSupport = true
 vim.opt.completeopt={ "menu", "menuone", "noselect" }
 vim.g.completion_matching_strategy_list = {"exact", "substring", "fuzzy"}
 
-Set_keymap("n", "gd", vim.lsp.buf.definition)
-Set_keymap("n", "gD", vim.lsp.buf.type_definition)
-Set_keymap("n", "gi", vim.lsp.buf.implementation)
-Set_keymap("n", "K", vim.lsp.buf.hover)
-Set_keymap("n", "<leader>vws", vim.lsp.buf.workspace_symbol)
-Set_keymap("n", "<leader>dv", vim.diagnostic.open_float)
-Set_keymap("n", "<C-n>", vim.diagnostic.goto_next)
-Set_keymap("n", "<leader>dp", vim.diagnostic.goto_prev)
-Set_keymap("n", "<leader>dl", "<cmd>Telescope diagnostics<CR>")
-Set_keymap("n", "<leader>ca", vim.lsp.buf.code_action)
-Set_keymap("n", "<leader>rr", vim.lsp.buf.references)
-Set_keymap("n", "<leader>rn", vim.lsp.buf.rename)
-Set_keymap("n", "<leader>vh", vim.lsp.buf.signature_help)
+SetKeymap("n", "gd", vim.lsp.buf.definition)
+SetKeymap("n", "gD", vim.lsp.buf.type_definition)
+SetKeymap("n", "gi", vim.lsp.buf.implementation)
+SetKeymap("n", "K", vim.lsp.buf.hover)
+SetKeymap("n", "<leader>vws", vim.lsp.buf.workspace_symbol)
+SetKeymap("n", "<leader>dv", vim.diagnostic.open_float)
+SetKeymap("n", "<C-n>", vim.diagnostic.goto_next)
+SetKeymap("n", "<leader>dp", vim.diagnostic.goto_prev)
+SetKeymap("n", "<leader>dl", "<cmd>Telescope diagnostics<CR>")
+SetKeymap("n", "<leader>ca", vim.lsp.buf.code_action)
+SetKeymap("n", "<leader>rr", vim.lsp.buf.references)
+SetKeymap("n", "<leader>rn", vim.lsp.buf.rename)
+SetKeymap("n", "<leader>vvh", vim.lsp.buf.signature_help)
 
 local function config(_config)
 	return vim.tbl_deep_extend("force", {
@@ -84,17 +85,17 @@ tabnine:setup({
 })
 
 -- Ts/Js
-require'lspconfig'.tsserver.setup(config())
-require'lspconfig'.eslint.setup(config())
+lspconfig.tsserver.setup(config())
+lspconfig.eslint.setup(config())
 
 -- viml
-require'lspconfig'.vimls.setup(config())
+lspconfig.vimls.setup(config())
 
 -- solidity-language-server
-require'lspconfig'.solidity_ls.setup(config())
+lspconfig.solc.setup(config())
 
 -- C/C++
--- require'lspconfig'.ccls.setup {
+-- lspconfig.ccls.setup {
 --   init_options = {
 --     compilationDatabaseDirectory = "build";
 --     index = {
@@ -106,7 +107,7 @@ require'lspconfig'.solidity_ls.setup(config())
 --   }
 -- }
 
-require'lspconfig'.clangd.setup(config({
+lspconfig.clangd.setup(config({
     cmd = {
         "clangd",
         "--enable-config",
@@ -117,7 +118,7 @@ require'lspconfig'.clangd.setup(config({
 }))
 
 -- Go
-require'lspconfig'.gopls.setup(config({
+lspconfig.gopls.setup(config({
     cmd = {"gopls", "serve"},
     settings = {
       gopls = {
@@ -130,7 +131,7 @@ require'lspconfig'.gopls.setup(config({
 }))
 
 -- Rust
-require'lspconfig'.rust_analyzer.setup(config())
+lspconfig.rust_analyzer.setup(config())
 
 -- Lua
 -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
@@ -139,7 +140,7 @@ local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
 local runtime_path = vim.split(package.path, ';')
 table.insert(runtime_path, "lua/?.lua")
 table.insert(runtime_path, "lua/?/init.lua")
-require'lspconfig'.sumneko_lua.setup(config({
+lspconfig.sumneko_lua.setup(config({
     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
     settings = {
         Lua = {
@@ -166,13 +167,13 @@ require'lspconfig'.sumneko_lua.setup(config({
 
 
 -- bash
-require'lspconfig'.bashls.setup (config())
+lspconfig.bashls.setup (config())
 
 -- svelte
-require'lspconfig'.svelte.setup (config())
+lspconfig.svelte.setup (config())
 
 -- python
-require'lspconfig'.pyright.setup (config())
+lspconfig.pyright.setup (config())
 
 local snippets_paths = function()
 	local plugins = { "friendly-snippets" }

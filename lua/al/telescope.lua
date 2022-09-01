@@ -62,9 +62,7 @@ end
 
 local function select_background(prompt_bufnr, map)
     local function set_the_background(close)
-        local content = require("telescope.actions.state").get_selected_entry(
-            prompt_bufnr
-        )
+        local content = require("telescope.actions.state").get_selected_entry()
         set_background(content.cwd .. "/" .. content.value)
         if close then
             require("telescope.actions").close(prompt_bufnr)
@@ -107,12 +105,12 @@ local function git_branches ()
     })
 end
 
-Set_keymap("n", "<leader>ps", "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input(\"Grep For > \")})<CR>", { noremap = true })
-Set_keymap("n", "<leader>pw", "<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand(\"<cword>\") }<CR>", { noremap = true })
-Set_keymap("n", "<C-p>", telescope_builtin.git_files, { noremap = true })
-Set_keymap("n", "<Leader>pf", telescope_builtin.find_files, { noremap = true })
-Set_keymap("n", "<leader>pb", telescope_builtin.buffers, { noremap = true })
-Set_keymap("n", "<leader>vh", telescope_builtin.help_tags, { noremap = true })
-Set_keymap("n", "<leader>va", set_wallpaper, { noremap = true })
-Set_keymap("n", "<leader>vd", search_dotfiles, { noremap = true })
-Set_keymap("n", "<leader>gb", git_branches, { noremap = true })
+SetKeymap("n", "<leader>ps", "<cmd>lua require('telescope.builtin').grep_string({ search = vim.fn.input(\"Grep For > \")})<CR>", { noremap = true })
+SetKeymap("n", "<leader>pw", "<cmd>lua require('telescope.builtin').grep_string { search = vim.fn.expand(\"<cword>\") }<CR>", { noremap = true })
+SetKeymap("n", "<C-p>", telescope_builtin.git_files, { noremap = true })
+SetKeymap("n", "<Leader>pf", telescope_builtin.find_files, { noremap = true })
+SetKeymap("n", "<leader>pb", telescope_builtin.buffers, { noremap = true })
+SetKeymap("n", "<leader>vh", telescope_builtin.help_tags, { noremap = true })
+SetKeymap("n", "<leader>va", set_wallpaper, { noremap = true })
+SetKeymap("n", "<leader>vd", search_dotfiles, { noremap = true })
+SetKeymap("n", "<leader>gb", git_branches, { noremap = true })
