@@ -4,14 +4,6 @@ SetKeymap("n", "<leader>u", ":UndotreeToggle<CR>", { noremap = true })
 -- File Explorer
 SetKeymap("n", "<leader>e", ":Ex<CR>", { noremap = true })
 
-SetKeymap("i", "<Tab>", "luasnip#expand_or_jumpable() ? '<Plug>luasnip-expand-or-jump' : '<Tab>'", { silent = true, expr = true })
-SetKeymap("i", "<S-Tab>", "<cmd>lua require'luasnip'.jump(-1)<Cr>", { noremap = true, silent = true })
-
-SetKeymap("s","<Tab>", "<cmd>lua require('luasnip').jump(1)<Cr>", { noremap = true, silent = true })
-SetKeymap("s", "<S-Tab>", "<cmd>lua require('luasnip').jump(-1)<Cr>", { noremap = true, silent = true })
-
-SetKeymap("i", "<C-E>", "luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'", { silent = true })
-SetKeymap("s", "<C-E>", "luasnip#choice_active() ? '<Plug>luasnip-next-choice' : '<C-E>'", { silent = true })
 
 SetKeymap("n", " Q", "<nop>", { noremap = true, silent = true })
 
