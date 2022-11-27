@@ -1,5 +1,6 @@
 return require("packer").startup(function(use)
     use "wbthomason/packer.nvim"
+
     -- Themes
     use 'gruvbox-community/gruvbox'
     use 'folke/tokyonight.nvim'
@@ -51,7 +52,6 @@ return require("packer").startup(function(use)
     use 'numToStr/Comment.nvim'
 
     -- Languages
-    use 'tomlion/vim-solidity'
     use 'ray-x/go.nvim'
     use 'rust-lang/rust.vim'
 

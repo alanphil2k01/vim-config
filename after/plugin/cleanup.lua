@@ -24,21 +24,13 @@ vim.api.nvim_create_autocmd("BufWritePre",{
     end
 })
 
-vim.api.nvim_create_autocmd("BufEnter",{
-    group = clean_up,
-    pattern = {"*.tsx", "*.ts", "*.jsx", "*.js"},
-    callback = function()
-        vim.bo.tabstop = 2
-        vim.bo.softtabstop = 2
-        vim.bo.shiftwidth = 2
-
-    end
-})
-
-vim.api.nvim_create_autocmd("BufWritePre",{
-    group = clean_up,
-    pattern = {"*.tsx", "*.ts", "*.jsx", "*.js"},
-    callback = function()
-        vim.cmd("EslintFixAll")
-    end
-})
+-- vim.api.nvim_create_autocmd("BufEnter",{
+--     group = clean_up,
+--     pattern = {"*.tsx", "*.ts", "*.jsx", "*.js"},
+--     callback = function()
+--         vim.bo.tabstop = 2
+--         vim.bo.softtabstop = 2
+--         vim.bo.shiftwidth = 2
+--
+--     end
+-- })
