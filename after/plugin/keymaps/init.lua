@@ -21,11 +21,8 @@ SetKeymap("n", "<leader>k", ":wincmd k<CR>", {})
 SetKeymap("n", "<leader>l", ":wincmd l<CR>", {})
 
 -- terminal
-SetKeymap("n", "<Leader>t", ":botright 12sp +terminal<CR> i", {})
-SetKeymap("t", "<Esc><Esc>", "<C-\\><C-n>", { noremap = true })
-SetKeymap("t", "<C-j>", "<C-\\><C-n>:wincmd j<CR>", { noremap = true })
-SetKeymap("t", "<C-k>", "<C-\\><C-n>:wincmd k<CR>", { noremap = true })
-SetKeymap("t", "<Esc>q", "<C-\\><C-n>:q<CR>", { noremap = true })
+SetKeymap("n", "<Leader>t", ":botright vsp +terminal<CR> i", {})
+SetKeymap("t", "<C-q>", "<C-\\><C-n>", { noremap = true })
 
 -- Normalize
 SetKeymap("v", "<leader>.", ":norm .<CR>", { noremap = true })
@@ -49,7 +46,8 @@ SetKeymap("n", "<leader>p", "\"+p", { noremap = true })
 -- yank remaps
 SetKeymap("n", "<leader>y", "\"+y", { noremap = true })
 SetKeymap("v", "<leader>y", "\"+y", { noremap = true })
-SetKeymap("n", "<leader>Y", "gg\"+yG", { noremap = true })
+SetKeymap("n", "<leader>Y", "\"+y$", { noremap = true })
+SetKeymap("n", "<leader>GY", "gg\"+yG", { noremap = true })
 SetKeymap("n", "Y", "y$", { noremap = true })
 
 -- delete to non-existance

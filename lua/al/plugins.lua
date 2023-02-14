@@ -10,6 +10,9 @@ return require("packer").startup(function(use)
     -- lsp
     use 'neovim/nvim-lspconfig'
 
+    -- Mason
+    use "williamboman/mason.nvim"
+
     -- nvim-cmp
     use 'hrsh7th/nvim-cmp'
     use 'hrsh7th/cmp-buffer'

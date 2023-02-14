@@ -136,36 +136,37 @@ lspconfig.rust_analyzer.setup(config())
 
 -- Lua
 -- https://github.com/sumneko/lua-language-server/wiki/Build-and-Run-(Standalone)
-local sumneko_root_path = os.getenv("HOME") .. '/Projects/lsp/lua-language-server'
-local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
-local runtime_path = vim.split(package.path, ';')
-table.insert(runtime_path, "lua/?.lua")
-table.insert(runtime_path, "lua/?/init.lua")
-lspconfig.sumneko_lua.setup(config({
-    cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
-    settings = {
-        Lua = {
-            runtime = {
-                -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
-                version = 'LuaJIT',
-                -- Setup your lua path
-                path = runtime_path,
-            },
-            diagnostics = {
-                -- Get the language server to recognize the `vim` global
-                globals = {'vim'},
-            },
-            workspace = {
-                -- Make the server aware of Neovim runtime files
-                library = vim.api.nvim_get_runtime_file("", true),
-            },
-            telemetry = {
-                enable = false,
-            },
-        },
-    },
-}))
+-- local sumneko_root_path = os.getenv("HOME") .. '/Projects/lsp/lua-language-server'
+-- local sumneko_binary = sumneko_root_path .. "/bin/lua-language-server"
+-- local runtime_path = vim.split(package.path, ';')
+-- table.insert(runtime_path, "lua/?.lua")
+-- table.insert(runtime_path, "lua/?/init.lua")
+-- lspconfig.sumneko_lua.setup(config({
+--     cmd = {sumneko_binary, "-E", sumneko_root_path .. "/main.lua"};
+--     settings = {
+--         Lua = {
+--             runtime = {
+--                 -- Tell the language server which version of Lua you're using (most likely LuaJIT in the case of Neovim)
+--                 version = 'LuaJIT',
+--                 -- Setup your lua path
+--                 path = runtime_path,
+--             },
+--             diagnostics = {
+--                 -- Get the language server to recognize the `vim` global
+--                 globals = {'vim'},
+--             },
+--             workspace = {
+--                 -- Make the server aware of Neovim runtime files
+--                 library = vim.api.nvim_get_runtime_file("", true),
+--             },
+--             telemetry = {
+--                 enable = false,
+--             },
+--         },
+--     },
+-- }))
 
+lspconfig.lua_language_server.setup (config())
 
 -- bash
 lspconfig.bashls.setup (config())
